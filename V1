@@ -1,0 +1,272 @@
+mkdir modrinth-launcher && cd modrinth-launcher
+gradle init --type basic
+mkdir -p app/src/main/java/com/example/modlauncher
+mkdir -p app/src/main/res
+mkdir -p app/src/main/res/values
+nano app/src/main/res/values/colors.xml
+<resources>
+    <color name="modrinth_green">#1BD96A</color>
+    <color name="dark_bg">#0E0E11</color>
+    <color name="dark_card">#16161D</color>
+    <color name="text_main">#EAEAF0</color>
+</resources>
+nano app/src/main/java/com/example/modlauncher/MainActivity.kt
+package com.example.modlauncher
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            ModrinthTheme {
+                HomeScreen()
+            }
+        }
+    }
+}
+
+@Composable
+fun ModrinthTheme(content: @Composable () -> Unit) {
+    MaterialTheme(
+        colorScheme = darkColorScheme(
+            primary = Color(0xFF1BD96A),
+            background = Color(0xFF0E0E11),
+            surface = Color(0xFF16161D),
+            onPrimary = Color.Black,
+            onBackground = Color(0xFFEAEAF0),
+            onSurface = Color(0xFFEAEAF0)
+        ),
+        content = content
+    )
+}
+
+@Composable
+fun HomeScreen() {
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .background(Color(0xFF0E0E11))
+        .padding(16.dp)) {
+
+        Text("Modrinth Launcher", fontSize = 24.sp, color = Color(0xFFEAEAF0))
+        Spacer(modifier = Modifier.height(12.dp))
+
+        Card(modifier = Modifier.fillMaxWidth().padding(8.dp), colors = CardDefaults.cardColors(containerColor = Color(0xFF16161D))) {
+            Column(modifier = Modifier.padding(16.dp)) {
+                Text("Example Modpack", fontSize = 18.sp, color = Color(0xFFEAEAF0))
+                Text("v1.0", color = Color.Gray)
+                Spacer(modifier = Modifier.height(8.dp))
+                Button(onClick = {}, colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1BD96A))) {
+                    Text("Play", color = Color.Black)
+                }
+            }
+        }
+    }
+}
+nano app/src/main/java/com/example/modlauncher/BottomNav.kt
+package com.example.modlauncher
+
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.foundation.layout.*
+
+@Composable
+fun ModrinthBottomNav(selectedIndex: Int, onSelect: (Int) -> Unit) {
+    NavigationBar(containerColor = Color(0xFF16161D)) {
+        listOf("Home", "Browse", "Settings").forEachIndexed { index, label ->
+            NavigationBarItem(
+                selected = selectedIndex == index,
+                onClick = { onSelect(index) },
+                label = { Text(label, color = Color(0xFFEAEAF0)) },
+                icon = {} // Can add icons later
+            )
+        }
+    }
+}
+setContent {
+    ModrinthTheme {
+        var selectedTab by remember { mutableStateOf(0) }
+        Column(modifier = Modifier.fillMaxSize()) {
+            when(selectedTab) {
+                0 -> HomeScreen()
+                1 -> BrowseScreen()
+                2 -> SettingsScreen()
+            }
+            ModrinthBottomNav(selectedTab) { selectedTab = it }
+        }
+    }
+}
+nano app/src/main/java/com/example/modlauncher/BrowseScreen.kt
+package com.example.modlauncher
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
+@Composable
+fun BrowseScreen() {
+    Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+        Text("Browse Mods / Packs", fontSize = 24.sp, color = Color(0xFFEAEAF0))
+        Spacer(modifier = Modifier.height(12.dp))
+        Text("This will eventually list mods, modpacks, RP, and SP.", color = Color.Gray)
+    }
+}
+nano app/src/main/java/com/example/modlauncher/SettingsScreen.kt
+package com.example.modlauncher
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
+@Composable
+fun SettingsScreen() {
+    Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+        Text("Settings", fontSize = 24.sp, color = Color(0xFFEAEAF0))
+        Spacer(modifier = Modifier.height(12.dp))
+        Text("Customize app settings here.", color = Color.Gray)
+    }
+}
+nano app/src/main/java/com/example/modlauncher/ModBrowser.kt
+package com.example.modlauncher
+
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.graphics.Color
+
+// Simple data class for mods, modpacks, RP, SP
+data class PackItem(val name: String, val type: String, val version: String)
+
+@Composable
+fun ModBrowser() {
+    // Example list - we'll replace this with real .mrpack content later
+    val items = listOf(
+        PackItem("Better MC", "Modpack", "1.21.1"),
+        PackItem("OptiFabric", "Mod", "0.13.0"),
+        PackItem("Vanilla RP Pack", "Resource Pack", "v2"),
+        PackItem("Sildur's Shaders", "Shader Pack", "v1")
+    )
+
+    Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+        Text("Mod / Pack Browser", color = Color(0xFFEAEAF0), style = MaterialTheme.typography.headlineMedium)
+        Spacer(modifier = Modifier.height(12.dp))
+
+        LazyColumn {
+            items(items) { item ->
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp)
+                        .clickable { /* handle install/play */ },
+                    colors = CardDefaults.cardColors(containerColor = Color(0xFF16161D))
+                ) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Text("${item.name} (${item.type})", color = Color(0xFFEAEAF0))
+                        Text(item.version, color = Color.Gray)
+                    }
+                }
+            }
+        }
+    }
+}
+@Composable
+fun BrowseScreen() {
+    ModBrowser()
+}
+nano app/src/main/java/com/example/modlauncher/MrpackImporter.kt
+package com.example.modlauncher
+
+import android.content.Context
+import java.io.File
+import java.util.zip.ZipInputStream
+
+// Function to import a .mrpack file
+fun importMrpack(context: Context, mrpackFile: File) {
+    // Create a target folder inside app storage
+    val targetDir = File(context.filesDir, "modpacks")
+    if (!targetDir.exists()) targetDir.mkdirs()
+
+    // Open the .mrpack (ZIP format)
+    ZipInputStream(mrpackFile.inputStream()).use { zip ->
+        var entry = zip.nextEntry
+        while (entry != null) {
+            val outFile = File(targetDir, entry.name)
+            if (!entry.isDirectory) {
+                outFile.outputStream().use {
+                    zip.copyTo(it)
+                }
+            } else {
+                outFile.mkdirs()
+            }
+            zip.closeEntry()
+            entry = zip.nextEntry
+        }
+    }
+}
+Card(
+    modifier = Modifier
+        .fillMaxWidth()
+        .padding(8.dp)
+        .clickable { 
+            // Example: import when clicked
+            // importMrpack(context, File("/path/to/example.mrpack"))
+        },
+    colors = CardDefaults.cardColors(containerColor = Color(0xFF16161D))
+)
+nano app/src/main/java/com/example/modlauncher/LauncherBridge.kt
+package com.example.modlauncher
+
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import java.io.File
+
+// Function to launch Zalith / Pojav
+fun launchMinecraft(context: Context) {
+    // Attempt to open Zalith
+    val zalithIntent = context.packageManager.getLaunchIntentForPackage("com.zalith.launcher")
+    if (zalithIntent != null) {
+        context.startActivity(zalithIntent)
+    } else {
+        // If Zalith not installed, fallback message
+        println("Zalith not installed. Please install it from Play Store.")
+    }
+}
+
+// Optional: launch a specific .mrpack
+fun launchMrpack(context: Context, mrpackFile: File) {
+    // This is just a placeholder; real implementation needs engine support
+    val intent = Intent(Intent.ACTION_VIEW)
+    intent.setDataAndType(Uri.fromFile(mrpackFile), "application/zip")
+    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+    context.startActivity(intent)
+}
+Button(
+    onClick = { launchMinecraft(context) },
+    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1BD96A))
+) {
+    Text("Play", color = Color.Black)
+}
