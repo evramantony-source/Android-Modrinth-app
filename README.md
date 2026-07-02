@@ -1,233 +1,258 @@
-# Modrinth Launcher Android - Full Edition with Java & Renderers
+# Modrinth Launcher Android - Full Edition with Complete Controls
 
-A professional-grade Minecraft launcher for Android with complete Java runtime support, advanced graphics renderer selection, and full game launching capabilities.
+A professional-grade Minecraft launcher for Android with **full in-game touch controls**, Java runtime management, and advanced graphics support.
 
-## 🎮 Core Features
+## 🎮 **NEW: Complete Control System**
 
-### Java Runtime Management
-- **Multiple Java Versions**: Java 8, 17, 21, and **Java 25** (for versions 26.1+)
-- **Auto-Detection**: Automatically detects device capabilities
-- **On-Demand Download**: Download only what you need
-- **Version Switching**: Seamless switching between Java versions
+### Virtual Controls Included:
+- 🎮 **Left Joystick** - Movement (W/A/S/D)
+- 🎮 **Right Joystick** - Look around (mouse emulation)
+- 🔘 **Action Buttons**:
+  - Jump (SPACE)
+  - Sneak (SHIFT) 
+  - Sprint (CTRL)
+  - Attack (Left Click)
+  - Use/Place (Right Click)
+- 📦 **Inventory Management**:
+  - Open Inventory (E)
+  - Drop Item (Q)
+  - Hotbar Selection (1-9)
+- 💬 **Utility Buttons**:
+  - Chat (T)
+  - Perspective Toggle (F5)
+  - Fullscreen (F11)
 
-### Graphics Renderer Support
-- 🎨 **OpenGL ES 2.0** - Compatibility mode (older devices)
-- 🎨 **OpenGL ES 3.0+** - Modern Android devices
-- 🎨 **OpenGL 4.x** - Desktop emulators
-- 🎨 **Vulkan** - High-performance renderer (Android 7.0+)
-- 🎨 **Zink** - OpenGL on Vulkan (Android 8.0+)
-- 🎨 **Software Rendering** - Fallback for testing
+### Advanced Control Features:
+- ✅ **Multiple Layouts** - Default, Compact, Survival, Creative, PvP
+- ✅ **Custom Layouts** - Create your own control schemes
+- ✅ **Button Editor** - Move, resize, customize buttons
+- ✅ **Sensitivity Control** - Adjust joystick sensitivity
+- ✅ **Opacity Control** - Adjust overlay transparency
+- ✅ **Scale Control** - Resize entire control panel
+- ✅ **Save/Load Profiles** - Multiple control configurations
+- ✅ **Key Mapping** - Remap buttons to any key
+- ✅ **Hold/Toggle Modes** - Switch between hold and toggle for actions
 
-### Game Features
-- 🚀 **Launch Any Minecraft Version** - 1.0 through 26.1+
-- 🎯 **Auto Version Detection** - Fetches all available versions
-- 📦 **Mod Management** - Browse, search, install mods
-- 🎒 **Modpack Support** - Full modpack installation
-- 🔧 **Performance Tuning** - JVM optimization per device
-- 👤 **Account Management** - Offline & Microsoft accounts
-- 📊 **Graphics Configuration** - Per-version renderer selection
+## 🎯 Control Presets
 
-## 🛠️ Technical Stack
+### **Default Layout**
+- All standard Minecraft controls
+- Beginner-friendly
+- Works for all game modes
 
-- **Language**: Kotlin 1.9+
-- **UI**: Jetpack Compose + Material 3
-- **Database**: Room ORM with multi-entity support
-- **Networking**: Retrofit 2 + OkHttp
-- **Graphics Detection**: OpenGL/EGL/Vulkan detection
-- **Dependency Injection**: Hilt
-- **Async**: Coroutines + Flow
-- **Java**: Azul Zulu JDK (portable)
+### **Compact Layout**  
+- Minimal button size
+- For smaller screens
+- Essential controls only
 
-## 📋 System Requirements
+### **Survival Layout**
+- Optimized for resource gathering
+- Extra building controls
+- Quick access to crafting
 
-**Device:**
-- Android 7.0 (API 24) or higher
-- 2GB RAM minimum (4GB recommended)
-- 8GB+ storage for games
-- 512MB app space
+### **Creative Layout**
+- Flight controls
+- Creative menu
+- Building helpers
 
-**Build:**
-- Android SDK 34+
-- JDK 17+
-- Gradle 8.0+
+### **PvP Layout**
+- Quick attack buttons
+- Sprint optimization
+- Strafe controls
 
-## 🔨 Building
+## 🖥️ Java Support
 
-### Android Studio
-```
-1. Open project
-2. Build → Build Bundle(s) / APK(s) → Build APK(s)
-3. APK: app/build/outputs/apk/debug/app-debug.apk
-```
+- ✅ Java 8 (1.0-1.16.5)
+- ✅ Java 17 (1.17-1.20.x)
+- ✅ Java 21 (1.21-24.x)
+- ✅ **Java 25** (26.1+)
 
-### Command Line
-```bash
-./gradlew assembleDebug    # Debug build
-./gradlew assembleRelease  # Release build
-```
+## 🎨 Graphics Renderers
 
-### GitHub Actions (Auto)
-- Push to repo → APK auto-builds → Download from Actions tab
+- ✅ OpenGL ES 2.0
+- ✅ OpenGL ES 3.0+
+- ✅ OpenGL 4.x
+- ✅ Vulkan
+- ✅ Zink
+- ✅ Software Rendering
 
-## 📱 Installation
+## 📦 Files Added
 
-1. Download APK from releases/artifacts
-2. Enable "Unknown Sources": Settings → Security
-3. Install APK file
-4. Open "Modrinth Launcher"
+**Control System:**
+- `Controls.kt` - Control models & keybindings
+- `ControlEntity.kt` - Database entities
+- `Converters.kt` - Room type converters
+- `ControlDao.kt` - Database access
+- `ControlLayoutRepository.kt` - Layout management
+- `ControlOverlay.kt` - UI components
+- `ControlViewModel.kt` - State management
+- `GamePlayScreen.kt` - Gameplay UI
+- `KeyEventSimulator.kt` - Key simulation
 
-## 🎮 Quick Start
+## 🚀 Installation
 
-### Step 1: Create Profile
-- Tab: "Profile"
-- Enter username
-- Choose account type (Offline/Microsoft)
-- Create profile
+1. Download APK
+2. Install on Android 7.0+ device
+3. Open "Modrinth Launcher"
+4. Create profile
+5. Select Minecraft version
+6. Tap "Play" with on-screen controls!
 
-### Step 2: Select Java Version
-- Tab: "Java Settings"
-- View recommended version for your device
-- Download required Java runtime
-- Select preferred version
+## ⚙️ Customization
 
-### Step 3: Choose Renderer
-- Tab: "Graphics Settings"
-- View device-recommended renderer
-- Select from available renderers
-- Adjust quality settings (FPS, texture quality, render distance)
+### Edit Controls:
+1. Go to "Settings" → "Controls"
+2. Select a layout
+3. Tap "Edit"
+4. Drag buttons to reposition
+5. Adjust sensitivity & opacity
+6. Save custom layout
 
-### Step 4: Launch Minecraft
-- Tab: "Versions"
-- Select Minecraft version
-- Tap "Launch"
-- Game starts with optimized settings
+### Create Custom Layout:
+1. Tap "Create Custom Layout"
+2. Name your layout
+3. Edit buttons as desired
+4. Save & select as active
 
-## 📊 Java Version to Minecraft Version Mapping
+## 🎮 Controls Reference
 
-| Java Version | Minecraft Versions |
-|---|---|
-| Java 8 | 1.0 - 1.16.5 |
-| Java 17 | 1.17 - 1.20.x |
-| Java 21 | 1.21 - 24.x |
-| **Java 25** | **26.1+** (Latest) |
+| Control | Key | Action |
+|---------|-----|--------|
+| Left Joystick | WASD | Move |
+| Right Joystick | Mouse | Look |
+| Jump Button | SPACE | Jump |
+| Sneak Button | SHIFT | Sneak |
+| Sprint Button | CTRL | Sprint |
+| Attack Area | L-Click | Attack/Mine |
+| Use Area | R-Click | Place/Use |
+| Inventory | E | Open Inventory |
+| Drop | Q | Drop Item |
+| Chat | T | Open Chat |
+| Hotbar 1-9 | 1-9 | Select Item |
+| F5 | F5 | Change View |
 
-## 🎨 Renderer Performance
+## 🔧 System Requirements
 
-| Renderer | Performance | Compatibility | Memory |
-|---|---|---|---|
-| Vulkan | ⭐⭐⭐⭐⭐ | Android 7.0+ | Low |
-| Zink | ⭐⭐⭐⭐ | Android 8.0+ | Medium |
-| OpenGL ES 3 | ⭐⭐⭐ | Android 4.3+ | Medium |
-| OpenGL ES 2 | ⭐⭐ | All devices | High |
-| Software | ⭐ | All devices | Very High |
+- **OS**: Android 7.0 (API 24)+
+- **RAM**: 2GB minimum (4GB recommended)
+- **Storage**: 8GB+ for games
+- **Device**: Any Android phone/tablet
 
-## 📝 Architecture
+## 🎯 Features Summary
 
-```
-app/
-├── data/
-│   ├── api/               # Modrinth + Minecraft APIs
-│   ├── database/          # Room entities & DAOs
-│   ├── model/             # Data models (Java, Renderer, etc.)
-│   └── repository/        # Java + Minecraft repositories
-├── ui/
-│   ├── screen/            # Compose screens
-│   ├── theme/             # Material 3 theme
-│   └── viewmodel/         # ViewModels
-├── util/
-│   ├── MinecraftLauncher.kt    # Launch configuration
-│   ├── JavaDownloadManager.kt  # Java management
-│   └── RendererOptimizer.kt    # Graphics optimization
-├── di/
-│   └── AppModule.kt       # Hilt injection
-└── MainActivity.kt
-```
+✨ **Gameplay:**
+- Full Minecraft 1.0 → 26.1+ support
+- On-screen touch controls
+- Virtual joysticks
+- Button customization
+- Multiple control layouts
 
-## 🔍 Graphics Detection
+🖥️ **Java Management:**
+- Java 8/17/21/25 support
+- Auto-detection
+- Version switching
+- Optimized JVM args
 
-App automatically detects:
-- ✅ Available renderers (Vulkan, OpenGL, etc.)
-- ✅ Max texture size
-- ✅ GPU capabilities
-- ✅ Recommended Java version
-- ✅ Optimal renderer for device
+🎨 **Graphics:**
+- GPU capability detection
+- Vulkan/Zink support
+- Renderer selection
+- Performance optimization
 
-## 🚀 Java Download URLs
+🔐 **Accounts:**
+- Offline accounts
+- Microsoft authentication
+- Profile management
+- Multi-profile support
 
-Using **Azul Zulu OpenJDK** (optimized for performance):
+📦 **Mod Support:**
+- Modrinth integration
+- Mod search & browse
+- One-click installation
+- Dependency resolution
 
-- **Java 8**: `cdn.azul.com/zulu/zulu8.80.0.21-ca-jdk8.0.402-linux_x64.tar.gz`
-- **Java 17**: `cdn.azul.com/zulu/zulu17.54.19-ca-jdk17.0.11-linux_x64.tar.gz`
-- **Java 21**: `cdn.azul.com/zulu/zulu21.36.17-ca-jdk21.0.3-linux_x64.tar.gz`
-- **Java 25**: `cdn.azul.com/zulu/zulu25.2.9-ca-jdk25.0.2-linux_x64.tar.gz`
+## 📖 Quick Start Guide
 
-## 🛡️ Troubleshooting
+### First Launch
+1. Create an offline or Microsoft account
+2. Select your preferred Java version (auto-detected)
+3. Choose graphics renderer (auto-recommended)
+4. Select default control layout
 
-**"App won't launch"**
-- Check device storage (need 5GB+)
-- Verify Android 7.0+
-- Restart device
+### Playing
+1. Select Minecraft version
+2. Tap "Launch"
+3. Game starts with on-screen controls
+4. Use joysticks and buttons to play
+5. Customize controls in settings
 
-**"Java download fails"**
-- Check internet connection
-- Verify storage space
-- Try different Java version
+### Modding
+1. Go to "Mods" tab
+2. Search for mods
+3. Install desired mods
+4. Select version
+5. Launch with mods
 
-**"Graphics errors"**
+## 🐛 Troubleshooting
+
+**Controls not responding?**
+- Check if controls are enabled
+- Try different layout
+- Adjust sensitivity
+- Restart game
+
+**Game crashes?**
+- Reduce Java memory
 - Try different renderer
-- Update Android OS
-- Check GPU drivers
+- Update app
+- Check storage space
 
-**"Game crashes on launch"**
-- Reduce Java memory (-Xmx)
-- Use different renderer
+**Performance issues?**
+- Lower graphics quality
+- Use less demanding renderer
 - Close other apps
+- Reduce render distance
 
-## 📚 API Documentation
-
-**Modrinth API**: https://docs.modrinth.com/
-**Minecraft Launcher**: https://launcher.mojang.com/
-**Azul Zulu**: https://www.azul.com/downloads/zulu/
-
-## 📄 License
+## 📝 License
 
 MIT License - Free for personal use
 
 ## ⚠️ Disclaimer
 
-- Unofficial launcher (not by Mojang/Microsoft)
-- Minecraft™ - Mojang Studios trademark
-- Modrinth™ - Modrinth Inc trademark
-- Use responsibly, respect mod licenses
-
-## 🤝 Contributing
-
-1. Fork repo
-2. Create feature branch
-3. Commit changes
-4. Push & create PR
+- Unofficial launcher (not affiliated with Mojang/Microsoft)
+- Minecraft™ is a trademark of Mojang Studios
+- Modrinth™ is a trademark of Modrinth Inc.
+- Use responsibly and respect mod licenses
 
 ## 📞 Support
 
-- 🐛 Bug reports: Open issue
-- 💡 Features: Open issue
+- 🐛 Bug Reports: Open GitHub issue
+- 💡 Feature Requests: GitHub issue
 - ❓ Questions: Check existing issues
+- 🤝 Contributing: Fork & create PR
 
-## 🗺️ Roadmap
+## 🗓️ Version History
 
-- [ ] Fabric/Forge auto-install
-- [ ] Quilt loader support
-- [ ] Resource pack manager
-- [ ] Shader pack support
-- [ ] Screenshot gallery
-- [ ] Play statistics
-- [ ] Cloud sync
-- [ ] Multiplayer tracking
-- [ ] Custom JVM args UI
-- [ ] Performance benchmarks
+**v3.0** - Full Control System
+- ✨ Complete touch control overlay
+- 🎮 Multiple control layouts
+- ⌨️ Key mapping system
+- 📱 Joystick implementation
+- 🎯 Button customization
+
+**v2.0** - Java & Graphics
+- Java 8/17/21/25 support
+- Renderer selection (Vulkan/Zink/OpenGL)
+- Device detection
+- Graphics optimization
+
+**v1.0** - Initial Release
+- Minecraft version launching
+- Modrinth mod integration
+- Account management
 
 ---
 
-**Version**: 2.0 (Full Java & Renderer Support)  
+**Status**: Production Ready ✅  
 **Last Updated**: 2026-07-02  
-**Status**: Production Ready ✅
+**Controls**: Fully Implemented 🎮

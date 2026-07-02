@@ -8,6 +8,7 @@ import com.evramantony.modrinth.data.repository.JavaRuntimeRepository
 import com.evramantony.modrinth.data.repository.MinecraftRepository
 import com.evramantony.modrinth.data.repository.ModRepository
 import com.evramantony.modrinth.data.repository.UserRepository
+import com.evramantony.modrinth.data.repository.ControlLayoutRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -81,6 +82,17 @@ object AppModule {
             database.rendererPreferenceDao(),
             database.deviceGraphicsDao(),
             context
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun provideControlLayoutRepository(
+        database: AppDatabase
+    ): ControlLayoutRepository {
+        return ControlLayoutRepository(
+            database.controlLayoutDao(),
+            database.keyBindingDao()
         )
     }
 }
