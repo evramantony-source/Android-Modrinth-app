@@ -6,33 +6,34 @@ import retrofit2.http.Query
 
 interface ModrinthApiService {
     @GET("v2/search")
-    suspend fun searchMods(
+    suspend fun searchContent(
         @Query("query") query: String,
         @Query("limit") limit: Int = 20,
-        @Query("offset") offset: Int = 0
+        @Query("offset") offset: Int = 0,
+        @Query("facets") facets: String
     ): SearchResponse
 
     @GET("v2/project/{id}")
-    suspend fun getModDetails(
-        @Path("id") modId: String
-    ): ModDetailsResponse
+    suspend fun getContentDetails(
+        @Path("id") contentId: String
+    ): ContentDetailsResponse
 
     @GET("v2/project/{id}/version")
-    suspend fun getModVersions(
-        @Path("id") modId: String,
+    suspend fun getContentVersions(
+        @Path("id") contentId: String,
         @Query("game_versions") gameVersions: String = "",
         @Query("loaders") loaders: String = ""
-    ): List<ModVersionResponse>
+    ): List<VersionResponse>
 }
 
 data class SearchResponse(
-    val hits: List<ModDetailsResponse>,
+    val hits: List<ContentDetailsResponse>,
     val offset: Int,
     val limit: Int,
     val total_hits: Int
 )
 
-data class ModDetailsResponse(
+data class ContentDetailsResponse(
     val id: String,
     val name: String,
     val description: String,
@@ -42,21 +43,30 @@ data class ModDetailsResponse(
     val icon_url: String,
     val project_url: String,
     val game_versions: List<String>,
-    val loaders: List<String>
+    val loaders: List<String>,
+    val project_type: String,
+    val dependencies: List<DependencyResponse>?
 )
 
-data class ModVersionResponse(
+data class VersionResponse(
     val id: String,
     val version_number: String,
     val name: String,
-    val files: List<ModFileResponse>,
+    val files: List<FileResponse>,
     val game_versions: List<String>,
-    val loaders: List<String>
+    val loaders: List<String>,
+    val dependencies: List<DependencyResponse>
 )
 
-data class ModFileResponse(
+data class FileResponse(
     val url: String,
     val filename: String,
     val size: Long,
     val hashes: Map<String, String>
+)
+
+data class DependencyResponse(
+    val project_id: String,
+    val version_id: String?,
+    val dependency_type: String
 )

@@ -8,12 +8,18 @@ interface GameLauncher {
         instance: GameInstance,
         account: GameAccount,
         renderer: GameRenderer = GameRenderer.OPENGL_ES
-    ): Boolean
+    ): GameLaunchResult
 
     suspend fun stop(): Boolean
     fun isRunning(): Boolean
     fun getGameProcess(): Process?
 }
+
+data class GameLaunchResult(
+    val success: Boolean,
+    val processId: Int = 0,
+    val errorMessage: String = ""
+)
 
 enum class GameRenderer {
     OPENGL_ES,
