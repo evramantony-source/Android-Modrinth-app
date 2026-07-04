@@ -6,6 +6,7 @@ interface RendererManager {
     fun switchRenderer(from: GameRenderer, to: GameRenderer): Boolean
     fun getAvailableRenderers(): List<GameRenderer>
     fun cleanup()
+    fun isRendererSupported(renderer: GameRenderer): Boolean
 }
 
 data class GraphicsSettings(
@@ -15,5 +16,7 @@ data class GraphicsSettings(
     val shadowDistance: Int = 8,
     val renderDistance: Int = 12,
     val brightness: Float = 1.0f,
-    val contrast: Float = 1.0f
+    val contrast: Float = 1.0f,
+    val fov: Int = 70,
+    val gamma: Float = 1.0f
 )
